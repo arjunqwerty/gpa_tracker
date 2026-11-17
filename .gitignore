@@ -1,0 +1,19 @@
+__pycache__/
+*.pyc
+.impeccable
+.pytest_cache/
+node_modules/
+dist/
+.env
+backups/
+
+# Virtual environments, logs, editor and OS clutter
+.venv/
+venv/
+*.log
+*.tsbuildinfo
+.coverage
+htmlcov/
+.vscode/
+.idea/
+.DS_Store

@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+/* Form controls share one look across the app. */
+@layer base {
+  input, select, textarea {
+    @apply rounded-md border border-slate-300 bg-white px-2 py-1 text-sm focus:border-indigo-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/40;
+  }
+  ::placeholder {
+    @apply text-slate-500;
+  }
+  a:focus-visible, button:focus-visible, summary:focus-visible {
+    @apply rounded-sm outline-2 outline-offset-2 outline-indigo-600;
+  }
+  ::selection {
+    @apply bg-indigo-100 text-indigo-950;
+  }
+  /* Numbers in tables line up digit by digit. */
+  table {
+    font-variant-numeric: tabular-nums;
+  }
+  input[type="checkbox"] {
+    @apply h-4 w-4 cursor-pointer p-0 accent-indigo-600;
+  }
+  select, input[type="file"], input[type="month"], input[type="date"] {
+    @apply cursor-pointer;
+  }
+  input:disabled, select:disabled {
+    @apply cursor-not-allowed bg-slate-50 text-slate-500;
+  }
+}

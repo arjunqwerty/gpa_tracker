@@ -1,0 +1,28 @@
+# Serves the app over HTTPS. Caddy fetches and renews the certificate itself when SITE_ADDRESS
+# is a public domain name; for "localhost" it uses its own local certificate.
+{$SITE_ADDRESS:localhost} {
+	encode gzip
+
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "DENY"
+		Referrer-Policy "same-origin"
+		Content-Security-Policy "default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-ancestors 'none'"
+		-Server
+	}
+
+	handle /api/* {
+		request_body {
+			max_size 6MB
+		}
+		reverse_proxy api:8000
+	}
+
+	# Everything else is the React app; unknown paths get index.html so client-side routes work.
+	handle {
+		root * /srv
+		try_files {path} /index.html
+		file_server
+	}
+}
